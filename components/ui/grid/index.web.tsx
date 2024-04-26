@@ -4,17 +4,17 @@ import { gridStyle, gridItemStyle } from "./styles";
 const Grid = ({
   className,
   numColumns = 12,
-  spacing,
-  rowSpacing,
-  columnSpacing,
+  // spacing,
+  // rowSpacing,
+  // columnSpacing,
   ...props
 }: any) => {
   return (
     <div
       className={gridStyle({
-        spacing,
-        rowSpacing,
-        columnSpacing,
+        // spacing,
+        // rowSpacing,
+        // columnSpacing,
         numColumns,
         class: className,
       })}

@@ -7,12 +7,14 @@ import { Grid, GridItem } from "./components/ui/grid";
 export default function App() {
   return (
     <GluestackUIProvider>
-      <SafeAreaView>
+      <SafeAreaView
+        style={{
+          flex: 1,
+        }}
+      >
         <Grid
           numColumns={8}
-          // spacing={5}
-          gap={25}
-          className="flex-row bg-pink-200 gap-x-20"
+          className="bg-pink-200 flex-row-reverse pl-[50px] gap-x-5 gap-y-5"
         >
           <GridItem colSpan={2} className="bg-pink-500">
             <Text>2</Text>
