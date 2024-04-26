@@ -16,16 +16,15 @@ const Grid = forwardRef(
     {
       className,
       numColumns = 12,
-      spacing = 0,
-      rowSpacing = 0,
-      columnSpacing = 0,
+      spacing,
+      rowSpacing,
+      columnSpacing,
       children,
       ...props
     }: any,
     ref
   ) => {
     const [calculatedWidth, setCalculatedWidth] = useState<number | null>(null);
-    console.log(children, "children");
     const itemsPerRow = useMemo(() => {
       // get the colSpan of each child
       const colSpanArr = React.Children.map(children, (child: any) => {
@@ -37,7 +36,6 @@ const Grid = forwardRef(
 
         return colSpan;
       });
-      console.log(colSpanArr, "col span arr");
 
       let currentRow = 1;
       let currentRowTotalColSpan = 0;
@@ -66,15 +64,14 @@ const Grid = forwardRef(
       }
 
       return rowItemsCount;
-    }, [children]);
+    }, [children, numColumns]);
 
     const contextValue = useMemo(() => {
-      console.log(itemsPerRow, "items per row");
       return {
         calculatedWidth,
         numColumns,
         itemsPerRow,
-        flexDirection: className.includes("flex-col") ? "column" : "row",
+        flexDirection: className?.includes("flex-col") ? "column" : "row",
         spacing,
         columnSpacing,
       };
@@ -166,14 +163,15 @@ const GridItem = forwardRef(
 
         setFlexBasisValue(flexBasisValue);
       }
-    }, [calculatedWidth, colSpan, numColumns]);
+    }, [calculatedWidth, colSpan, numColumns]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
       <View
         ref={ref}
         className={gridItemStyle({ colSpan, class: className })}
-        flexBasis={flexBasisValue}
-        colSpan={colSpan}
+        style={{
+          flexBasis: flexBasisValue,
+        }}
         {...props}
       />
     );
