@@ -1,7 +1,7 @@
 import "./global.css";
 import React from "react";
 import { GluestackUIProvider } from "./components/ui/gluestack-ui-provider";
-import { SafeAreaView, Text, View } from "react-native";
+import { SafeAreaView, Text, View, ScrollView } from "react-native";
 import { Grid, GridItem } from "./components/ui/grid";
 
 export default function App() {
@@ -12,10 +12,7 @@ export default function App() {
           flex: 1,
         }}
       >
-        <Grid
-          numColumns={8}
-          className="bg-pink-200 flex-row-reverse pl-[50px] gap-x-5 gap-y-5"
-        >
+        <Grid numColumns={8} className="flex-col bg-pink-300 gap-x-10">
           <GridItem colSpan={2} className="bg-pink-500">
             <Text>2</Text>
           </GridItem>

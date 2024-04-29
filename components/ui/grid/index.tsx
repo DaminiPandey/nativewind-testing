@@ -68,7 +68,7 @@ const Grid = forwardRef(
         gap: props?.gap || 0,
         columnGap: props?.columnGap || 0,
       };
-    }, [calculatedWidth, itemsPerRow, className, numColumns, props]);
+    }, [calculatedWidth, itemsPerRow, numColumns, props]);
 
     const childrenWithProps = React.Children.map(children, (child, index) => {
       if (React.isValidElement(child)) {
@@ -86,7 +86,6 @@ const Grid = forwardRef(
             numColumns,
             class: className,
           })}
-          {...props}
           onLayout={(event: any) => {
             const paddingLeftToSubtract =
               props?.paddingStart || props?.paddingLeft || props?.padding || 0;
@@ -101,6 +100,7 @@ const Grid = forwardRef(
 
             setCalculatedWidth(width);
           }}
+          {...props}
         >
           {calculatedWidth && childrenWithProps}
         </View>
@@ -170,7 +170,6 @@ const GridItem = forwardRef(
             100
           ) + "%";
 
-        console.log(flexBasisValue, "fbv");
         setFlexBasisValue(flexBasisValue);
       }
     }, [calculatedWidth, colSpan, numColumns, columnGap, gap, flexDirection]); // eslint-disable-line react-hooks/exhaustive-deps
