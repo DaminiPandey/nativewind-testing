@@ -6,15 +6,72 @@ import React, {
   useMemo,
   forwardRef,
 } from "react";
-
+import type { VariantProps } from "@gluestack-ui/nativewind-utils";
 import { View } from "react-native";
 import { gridStyle, gridItemStyle } from "./styles";
 import { cssInterop } from "nativewind";
 
 const GridContext = createContext<any>({});
+type IGridProps = React.ComponentProps<typeof View> &
+  VariantProps<typeof gridStyle> & {
+    gap?: number;
+    rowGap?: number;
+    columnGap?: number;
+    flexDirection?: "row" | "column" | "row-reverse" | "column-reverse";
+    padding?: number;
+    paddingLeft?: number;
+    paddingRight?: number;
+    paddingStart?: number;
+    paddingEnd?: number;
+  };
+
+type IGridItemProps = React.ComponentProps<typeof View> &
+  VariantProps<typeof gridItemStyle> & {
+    index?: number;
+  };
+
+function arrangeChildrenIntoRows({
+  childrenArray,
+  colSpanArr,
+  numColumns,
+}: {
+  childrenArray: React.ReactNode[];
+  colSpanArr: number[];
+  numColumns: number;
+}) {
+  let currentRow = 1;
+  let currentRowTotalColSpan = 0;
+
+  // store how many items in each row
+  const rowItemsCount: {
+    [key: number]: number[];
+  } = {};
+
+  for (let i = 0; i < childrenArray.length; i++) {
+    const colSpan = colSpanArr[i];
+
+    // if current row is full, go to next row
+    if (currentRowTotalColSpan + colSpan > numColumns) {
+      currentRow++;
+      currentRowTotalColSpan = colSpan;
+    } else {
+      // if current row is not full, add colSpan to current row
+      currentRowTotalColSpan += colSpan;
+    }
+
+    rowItemsCount[currentRow] = rowItemsCount[currentRow]
+      ? [...rowItemsCount[currentRow], i]
+      : [i];
+  }
+
+  return rowItemsCount;
+}
 
 const Grid = forwardRef(
-  ({ className, numColumns = 12, children, ...props }: any, ref) => {
+  (
+    { className, numColumns = 12, children, ...props }: IGridProps,
+    ref?: any
+  ) => {
     const [calculatedWidth, setCalculatedWidth] = useState<number | null>(null);
 
     const itemsPerRow = useMemo(() => {
@@ -29,35 +86,16 @@ const Grid = forwardRef(
         return colSpan;
       });
 
-      let currentRow = 1;
-      let currentRowTotalColSpan = 0;
-
-      // store how many items in each row
-      const rowItemsCount: {
-        [key: number]: number[];
-      } = {};
-
       const childrenArray = React.Children.toArray(children);
 
-      for (let i = 0; i < childrenArray.length; i++) {
-        const colSpan = colSpanArr[i];
-
-        // if current row is full, go to next row
-        if (currentRowTotalColSpan + colSpan > numColumns) {
-          currentRow++;
-          currentRowTotalColSpan = colSpan;
-        } else {
-          // if current row is not full, add colSpan to current row
-          currentRowTotalColSpan += colSpan;
-        }
-
-        rowItemsCount[currentRow] = rowItemsCount[currentRow]
-          ? [...rowItemsCount[currentRow], i]
-          : [i];
-      }
+      const rowItemsCount = arrangeChildrenIntoRows({
+        childrenArray,
+        colSpanArr,
+        numColumns,
+      });
 
       return rowItemsCount;
-    }, [numColumns]);
+    }, [numColumns, children]);
 
     const contextValue = useMemo(() => {
       return {
@@ -109,6 +147,7 @@ const Grid = forwardRef(
   }
 );
 
+//@ts-ignore
 cssInterop(Grid, {
   className: {
     target: "style",
@@ -127,7 +166,7 @@ cssInterop(Grid, {
 });
 
 const GridItem = forwardRef(
-  ({ className, colSpan = 1, ...props }: any, ref) => {
+  ({ className, colSpan = 1, ...props }: IGridItemProps, ref?: any) => {
     const [flexBasisValue, setFlexBasisValue] = useState<
       number | string | null
     >("auto");
@@ -150,7 +189,7 @@ const GridItem = forwardRef(
       ) {
         // find out in which row of itemsPerRow the current item's index is
         const row = Object.keys(itemsPerRow).find((key) => {
-          return itemsPerRow[key].includes(props.index);
+          return itemsPerRow[key].includes(props?.index);
         });
 
         const rowColsCount = itemsPerRow[row as string].length;
@@ -178,6 +217,7 @@ const GridItem = forwardRef(
       <View
         ref={ref}
         className={gridItemStyle({ colSpan, class: className })}
+        //@ts-ignore
         style={{
           flexBasis: flexBasisValue,
         }}

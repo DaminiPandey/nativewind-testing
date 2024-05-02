@@ -12,31 +12,128 @@ export default function App() {
           flex: 1,
         }}
       >
-        <Grid numColumns={8} className="flex-col bg-pink-300 gap-x-10">
-          <GridItem colSpan={2} className="bg-pink-500">
-            <Text>2</Text>
+        <Grid className="bg-pink-600 p-8 gap-5" numColumns={4}>
+          <GridItem
+            // colSpan={4}
+            className="bg-background-50 rounded-md text-center"
+          >
+            <View className="p-20">
+              <Text className="text-sm">01</Text>
+            </View>
           </GridItem>
-          <GridItem colSpan={4} className="bg-pink-500">
-            <Text>4</Text>
+          <GridItem
+            // colSpan={4}
+            className="bg-background-50 rounded-md text-center"
+          >
+            <View className="p-20">
+              <Text className="text-sm">01</Text>
+            </View>
           </GridItem>
-          <GridItem colSpan={2} className="bg-pink-500">
-            <Text>2</Text>
+          <GridItem
+            // colSpan={4}
+            className="bg-background-50 rounded-md text-center"
+          >
+            <View className="p-20">
+              <Text className="text-sm">01</Text>
+            </View>
+          </GridItem>
+          <GridItem
+            // colSpan={4}
+            className="bg-background-50 rounded-md text-center"
+          >
+            <View className="p-20">
+              <Text className="text-sm">01</Text>
+            </View>
+          </GridItem>
+          <GridItem
+            // colSpan={4}
+            className="bg-background-50 rounded-md text-center"
+          >
+            <View className="p-20">
+              <Text className="text-sm">01</Text>
+            </View>
+          </GridItem>
+          <GridItem
+            // colSpan={4}
+            className="bg-background-50 p-2  rounded-md text-center"
+          >
+            <Text className="text-sm">01</Text>
+          </GridItem>
+          <GridItem
+            // colSpan={4}
+            className="bg-background-50 p-2  rounded-md text-center"
+          >
+            <Text className="text-sm">01</Text>
+          </GridItem>
+          <GridItem
+            // colSpan={4}
+            className="bg-background-50 p-2  rounded-md text-center"
+          >
+            <Text className="text-sm">01</Text>
           </GridItem>
 
-          <GridItem colSpan={8} className="bg-pink-500">
-            <Text>8</Text>
+          {/* <GridItem
+            colSpan={4}
+            className="bg-background-50 p-3 rounded-md text-center"
+          >
+            <Text className="text-sm">02</Text>
           </GridItem>
-
-          <GridItem colSpan={8} className="bg-pink-500">
-            <Text>12</Text>
+          <GridItem
+            colSpan={4}
+            className="bg-background-50 p-3 rounded-md text-center"
+          >
+            <Grid numColumns={4} className="gap-5">
+              <GridItem
+                colSpan={1}
+                className="bg-background-200 p-3 rounded-md"
+              >
+                <Text className="text-sm">01</Text>
+              </GridItem>
+              <GridItem
+                colSpan={3}
+                className="bg-background-200 p-3 rounded-md"
+              >
+                <Text className="text-sm">04</Text>
+              </GridItem>
+              <GridItem
+                colSpan={4}
+                className="bg-background-200 p-3 rounded-md"
+              >
+                <Text className="text-sm">04</Text>
+              </GridItem>
+            </Grid>
           </GridItem>
-
-          <GridItem colSpan={2} className="bg-pink-500">
-            <Text>2</Text>
-          </GridItem>
-          <GridItem colSpan={6} className="bg-pink-500">
-            <Text>6</Text>
-          </GridItem>
+          <GridItem
+            colSpan={4}
+            className="bg-background-50 p-2 rounded-md text-center"
+          >
+            <Grid numColumns={4} className="gap-5">
+              <GridItem
+                colSpan={2}
+                className="bg-background-200 p-3 rounded-md"
+              >
+                <Text className="text-sm">01</Text>
+              </GridItem>
+              <GridItem
+                colSpan={2}
+                className="bg-background-200 p-3 rounded-md"
+              >
+                <Text className="text-sm">02</Text>
+              </GridItem>
+              <GridItem
+                colSpan={2}
+                className="bg-background-200 p-3 rounded-md"
+              >
+                <Text className="text-sm">03</Text>
+              </GridItem>
+              <GridItem
+                colSpan={2}
+                className="bg-background-200 p-3 rounded-md"
+              >
+                <Text className="text-sm">04</Text>
+              </GridItem>
+            </Grid>
+          </GridItem> */}
         </Grid>
       </SafeAreaView>
     </GluestackUIProvider>

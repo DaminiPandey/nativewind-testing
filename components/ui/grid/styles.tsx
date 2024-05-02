@@ -5,7 +5,7 @@ const gridBaseStyle = isWeb ? "grid grid-cols-12" : "";
 const gridItemBaseStyle = isWeb ? "col-span-1 w-auto" : "";
 
 export const gridStyle = tva({
-  base: `flex-row w-full flex-wrap justify-start box-border ${gridBaseStyle}`,
+  base: `flex-row w-full flex-wrap justify-start box-border ${gridBaseStyle} !border-box`,
   variants: {
     numColumns: {
       1: "grid-cols-1",
@@ -25,7 +25,7 @@ export const gridStyle = tva({
 });
 
 export const gridItemStyle = tva({
-  base: `w-full ${gridItemBaseStyle}`,
+  base: `w-full ${gridItemBaseStyle} !border-box`,
   variants: {
     colSpan: {
       1: "col-span-1",
