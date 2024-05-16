@@ -5,11 +5,11 @@ import React, {
   useContext,
   useMemo,
   forwardRef,
-} from "react";
-import type { VariantProps } from "@gluestack-ui/nativewind-utils";
-import { View } from "react-native";
-import { gridStyle, gridItemStyle } from "./styles";
-import { cssInterop } from "nativewind";
+} from 'react';
+import type { VariantProps } from '@gluestack-ui/nativewind-utils';
+import { View } from 'react-native';
+import { gridStyle, gridItemStyle } from './styles';
+import { cssInterop } from 'nativewind';
 
 const GridContext = createContext<any>({});
 type IGridProps = React.ComponentProps<typeof View> &
@@ -17,7 +17,7 @@ type IGridProps = React.ComponentProps<typeof View> &
     gap?: number;
     rowGap?: number;
     columnGap?: number;
-    flexDirection?: "row" | "column" | "row-reverse" | "column-reverse";
+    flexDirection?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
     padding?: number;
     paddingLeft?: number;
     paddingRight?: number;
@@ -102,7 +102,7 @@ const Grid = forwardRef(
         calculatedWidth,
         numColumns,
         itemsPerRow,
-        flexDirection: props?.flexDirection || "row",
+        flexDirection: props?.flexDirection || 'row',
         gap: props?.gap || 0,
         columnGap: props?.columnGap || 0,
       };
@@ -150,17 +150,17 @@ const Grid = forwardRef(
 //@ts-ignore
 cssInterop(Grid, {
   className: {
-    target: "style",
+    target: 'style',
     nativeStyleToProp: {
-      gap: "gap",
-      rowGap: "rowGap",
-      columnGap: "columnGap",
-      flexDirection: "flexDirection",
-      padding: "padding",
-      paddingLeft: "paddingLeft",
-      paddingRight: "paddingRight",
-      paddingStart: "paddingStart",
-      paddingEnd: "paddingEnd",
+      gap: 'gap',
+      rowGap: 'rowGap',
+      columnGap: 'columnGap',
+      flexDirection: 'flexDirection',
+      padding: 'padding',
+      paddingLeft: 'paddingLeft',
+      paddingRight: 'paddingRight',
+      paddingStart: 'paddingStart',
+      paddingEnd: 'paddingEnd',
     },
   },
 });
@@ -169,7 +169,7 @@ const GridItem = forwardRef(
   ({ className, colSpan = 1, ...props }: IGridItemProps, ref?: any) => {
     const [flexBasisValue, setFlexBasisValue] = useState<
       number | string | null
-    >("auto");
+    >('auto');
 
     const {
       calculatedWidth,
@@ -182,7 +182,7 @@ const GridItem = forwardRef(
 
     useEffect(() => {
       if (
-        !flexDirection?.includes("column") &&
+        !flexDirection?.includes('column') &&
         calculatedWidth &&
         numColumns > 0 &&
         colSpan > 0
@@ -207,7 +207,7 @@ const GridItem = forwardRef(
               calculatedWidth) *
               100,
             100
-          ) + "%";
+          ) + '%';
 
         setFlexBasisValue(flexBasisValue);
       }
@@ -227,7 +227,7 @@ const GridItem = forwardRef(
   }
 );
 
-Grid.displayName = "Grid";
-GridItem.displayName = "GridItem";
+Grid.displayName = 'Grid';
+GridItem.displayName = 'GridItem';
 
 export { Grid, GridItem };
